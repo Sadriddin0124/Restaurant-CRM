@@ -44,3 +44,11 @@
 .home__right {
     width: 336px;
 }
+
+.home__foods {
+    padding: 24px;
+    @extend %flex_center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
