@@ -1,0 +1,38 @@
+%flex_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+%flex_col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.category {
+    min-width: 220px;
+    height: 90px;
+    border-radius: 20px;
+    background: var(--slate);
+    border: 1px solid var(--white);
+    @extend %flex_center;
+    gap: 26px;
+    cursor: pointer;
+}
+
+.category__img {
+    width: 55px;
+    height: 55px;
+}
+
+.category__title {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.category__active {
+    border: 1px solid var(--red);
+    background: var(--redWhite);
+}
