@@ -6,7 +6,7 @@ import Category1 from "../../assets/category.png"
 import Category2 from "../../assets/category2.png"
 import Category3 from "../../assets/category3.png"
 import Category4 from "../../assets/category4.png"
-import Category from '../../components/Category/Category'
+import Category from "../../components/Category/Category"
 import RightBar from '../../components/RightBar/RightBar'
 const Home = () => {
     const [category, setCategory] = useState([
