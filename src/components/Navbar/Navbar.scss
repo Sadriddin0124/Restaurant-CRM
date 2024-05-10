@@ -58,3 +58,13 @@
     background: transparent;
     padding: 12px;
 }
+
+@media (max-width: 1151px) {
+    .navbar {
+        padding: 24px 0;
+    }
+    .navbar__left {
+        display: none;
+    }
+}
+

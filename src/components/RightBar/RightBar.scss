@@ -14,6 +14,7 @@
 .right {
     position: fixed;
     right: 0;
+    top: 0;
     width: 336px;
     height: 100vh;
     background: var(--slate);
@@ -126,4 +127,44 @@
     font-weight: 700;
     color: var(--white);
     margin-top: 20px;
+}
+
+.right__open {
+    position: absolute;
+    top: 45%;
+    left: -15px;
+    width: 30px;
+    height: 30px;
+    background: var(--black);
+    border-radius: 50%;
+    border: none;
+    color: var(--white);
+    font-size: 20px;
+    @extend %flex_center;
+    cursor: pointer;
+    display: none;
+}
+
+
+@media (max-width: 900px) {
+    .right {
+        right: -320px;
+        box-shadow: 0 0 10px silver;
+        transition: .3s all;
+    }
+    .right__open {
+        display: flex;
+        transition: .5s all;
+    }
+    .right_0 {
+        z-index: 13;
+        right: 0 !important;
+        background: var(--white);
+    }
+    .right__close {
+        transform: rotate(180deg);
+    }
+    .right__card {
+        border: 1px solid silver;
+    }
 }

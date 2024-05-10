@@ -43,3 +43,9 @@
     border-radius: 30px;
     background: var(--slate);
 }
+
+@media (max-width: 1151px) {
+    .notifications__navbar {
+        width: 100%;
+    }
+}

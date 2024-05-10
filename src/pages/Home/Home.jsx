@@ -68,6 +68,7 @@ const Home = () => {
       price: "$5.08",
     },
   ]);
+  const [openRightBar, setOpenRightBar] = useState(false)
   return (
     <div className="home">
       <div className="home__sidebar">
@@ -98,7 +99,7 @@ const Home = () => {
         </div>
       </div>
       <div className="home__right">
-        <RightBar />
+        <RightBar openRightBar={openRightBar} setOpenRightBar={setOpenRightBar}/>
       </div>
     </div>
   );

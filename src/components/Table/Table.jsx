@@ -24,8 +24,8 @@ export default function BasicTable() {
   return (
     <TableContainer >
       <Table sx={{ minWidth: 650, background: "transparent" }} aria-label="simple table">
-        <TableHead sx={{ background: "rgba(255, 255, 255, 0.26)", borderRadius: "50px" }}>
-          <TableRow>
+        <TableHead sx={{ backgroundColor: 'rgba(255, 255, 255, 0.26)', borderRadius: '40px' }}>
+          <TableRow sx={{ backgroundColor: 'rgba(255, 255, 255, 0.26)', borderRadius: '40px' }}>
             <TableCell>Id</TableCell>
             <TableCell align="right">Worker name</TableCell>
             <TableCell align="right">Date</TableCell>

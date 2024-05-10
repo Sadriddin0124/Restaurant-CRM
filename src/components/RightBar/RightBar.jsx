@@ -1,9 +1,12 @@
 import React from 'react'
 import "./RightBar.scss"
 import Food from "../../assets/food1.png"
-const RightBar = () => {
+import { IoIosArrowBack } from "react-icons/io";
+
+const RightBar = ({openRightBar, setOpenRightBar}) => {
   return (
-    <aside className='right'>
+    <aside className={openRightBar ? 'right_0 right' : "right"}>
+    <button className={openRightBar ? 'right__close right__open' : "right__open"} onClick={()=>setOpenRightBar(prev=> !prev)}><IoIosArrowBack /></button>
       <h1 className="right__title">Current Order</h1>
       <div className="right__cards">
         <div className="right__card">
