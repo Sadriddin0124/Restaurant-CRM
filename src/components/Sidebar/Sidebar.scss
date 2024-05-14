@@ -80,6 +80,9 @@
 
 
 @media (max-width: 447px) {
+    .sidebar {
+        height: 60px;
+    }
     .sidebar__logo {
         display: none;
     }

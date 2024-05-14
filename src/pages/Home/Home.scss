@@ -60,11 +60,11 @@
         justify-content: center;
     }
     .home {
-        // flex-direction: column;
         align-items: flex-start;
         justify-content: start;
         overflow: hidden;
         gap: 0;
+        padding-bottom: 100px;
     }
     .home__center {
         width: 95%;
@@ -73,6 +73,6 @@
         width: 0;
     }
     .home__category {
-        margin-right: 30px;
+        margin-left: 10px;
     }
 }

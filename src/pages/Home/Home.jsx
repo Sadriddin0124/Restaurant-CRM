@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
@@ -10,6 +10,7 @@ import Category from "../../components/Category/Category";
 import RightBar from "../../components/RightBar/RightBar";
 import Food from "../../assets/food1.png";
 import FoodCard from "../../components/FoodCard/FoodCard";
+import { useProductStore } from "../../store/ProductStore/ProductStore";
 const Home = () => {
   const [category, setCategory] = useState([
     { id: 1, img: Category1, text: "Noodles" },
@@ -68,6 +69,16 @@ const Home = () => {
       price: "$5.08",
     },
   ]);
+  const { getProducts} = useProductStore()
+  const [foods, setFoods] = useState([])
+  useEffect(()=> {
+    receiveProducts()
+  }, [])
+  const receiveProducts = async() => {
+    const res = await getProducts()
+    console.log(res);
+    setFoods(res?.data?.products)
+  }
   const [openRightBar, setOpenRightBar] = useState(false)
   return (
     <div className="home">
@@ -92,7 +103,7 @@ const Home = () => {
         </div>
         <div className="home__foods">
             {
-                mainFoods?.map((item,index)=> {
+                foods?.map((item,index)=> {
                     return <FoodCard key={index} item={item}/>
                 })
             }
