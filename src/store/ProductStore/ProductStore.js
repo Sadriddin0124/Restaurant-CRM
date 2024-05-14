@@ -3,6 +3,14 @@ import axiosClient from "../../plugins/axiosClient"
 
 export const useProductStore = create((set) => ({ 
     products: [],
+    fileUpload: async(formData)=> {
+        try {
+          const response = axiosClient.post(`/file-upload`, formData)
+          return response
+        } catch (error) {
+            console.log(error);
+        }
+    },
     getProducts: async()=> {
         try {
           const response = axiosClient.get(`/products/get/1/12`)

@@ -29,7 +29,7 @@
 .food__img {
     position: absolute;
     top: -120px;
-    left: 42px;
+    left: 45px;
     width: 200px;
     height: 200px;
     img {
@@ -74,16 +74,18 @@
     color: var(--black);
 }
 
-.food__plus {
+.food__action {
     position: absolute;
     right: 28px;
     bottom: 23px;
-    width: 54px;
-    height: 54px;
+    width: 100px;
+    height: 50px;
     font-size: 18px;
     background: var(--black);
     color: var(--white);
     @extend %flex_center;
+    justify-content: space-evenly;
     border-radius: 50vw;
     cursor: pointer;
+    border: none;
 }

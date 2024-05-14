@@ -1,9 +1,12 @@
 import React from 'react'
 import "./FoodCard.scss"
 import { FaStar } from "react-icons/fa";
-import { AiOutlinePlus } from "react-icons/ai";
+// import { AiOutlinePlus } from "react-icons/ai";
 import NOIMAGE from "../../assets/noimage.png"
-const FoodCard = ({item}) => {
+import { CiEdit } from "react-icons/ci";
+import { MdOutlineDelete } from "react-icons/md";
+
+const FoodCard = ({item, setDeleteModal}) => {
   return (
     <div className='food'>
       <div className="food__img">
@@ -20,7 +23,10 @@ const FoodCard = ({item}) => {
         <p>{item?.rate}</p>
       </div>
       <h1 className="food__price">{item?.price}</h1>
-      <button className="food__plus"><AiOutlinePlus/></button>
+      <button className="food__action">
+        <MdOutlineDelete size={24} onClick={()=>setDeleteModal(true)}/>
+        <CiEdit size={24}/>
+        </button>
     </div>
   )
 }

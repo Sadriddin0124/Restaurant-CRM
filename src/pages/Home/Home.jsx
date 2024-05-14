@@ -11,6 +11,7 @@ import RightBar from "../../components/RightBar/RightBar";
 import Food from "../../assets/food1.png";
 import FoodCard from "../../components/FoodCard/FoodCard";
 import { useProductStore } from "../../store/ProductStore/ProductStore";
+import DeleteModal from "../../components/DeleteModal/DeleteModal";
 const Home = () => {
   const [category, setCategory] = useState([
     { id: 1, img: Category1, text: "Noodles" },
@@ -24,7 +25,7 @@ const Home = () => {
       id: 1,
       img: Food,
       title: "Chinese Yakisbo",
-      desc: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.",
+      description: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.",
       rate: 4.5,
       price: "$5.08",
     },
@@ -32,7 +33,7 @@ const Home = () => {
       id: 2,
       img: Food,
       title: "Chinese Yakisbo",
-      desc: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.",
+      description: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.",
       rate: 4.5,
       price: "$5.08",
     },
@@ -40,7 +41,7 @@ const Home = () => {
       id: 3,
       img: Food,
       title: "Chinese Yakisbo",
-      desc: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.",
+      description: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.",
       rate: 4.5,
       price: "$5.08",
     },
@@ -48,7 +49,7 @@ const Home = () => {
       id: 4,
       img: Food,
       title: "Chinese Yakisbo",
-      desc: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.",
+      description: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.",
       rate: 4.5,
       price: "$5.08",
     },
@@ -56,7 +57,7 @@ const Home = () => {
       id: 5,
       img: Food,
       title: "Chinese Yakisbo",
-      desc: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.",
+      description: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.",
       rate: 4.5,
       price: "$5.08",
     },
@@ -64,7 +65,7 @@ const Home = () => {
       id: 6,
       img: Food,
       title: "Chinese Yakisbo",
-      desc: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.",
+      description: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.",
       rate: 4.5,
       price: "$5.08",
     },
@@ -80,8 +81,13 @@ const Home = () => {
     setFoods(res?.data?.products)
   }
   const [openRightBar, setOpenRightBar] = useState(false)
+  const [deleteModal, setDeleteModal] = useState(false)
+  const toggle = () => {
+    setDeleteModal(false)
+  }
   return (
     <div className="home">
+      <DeleteModal open={deleteModal} toggle={toggle}/>
       <div className="home__sidebar">
         <Sidebar />
       </div>
@@ -104,7 +110,7 @@ const Home = () => {
         <div className="home__foods">
             {
                 foods?.map((item,index)=> {
-                    return <FoodCard key={index} item={item}/>
+                    return <FoodCard key={index} item={item} setDeleteModal={setDeleteModal}/>
                 })
             }
         </div>
