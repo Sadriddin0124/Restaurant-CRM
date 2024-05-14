@@ -28,4 +28,20 @@ export const useProductStore = create((set) => ({
             console.log(error);
         }
     },
+    updateProduct: async(payload)=> {
+        try {
+          const response = axiosClient.put(`/product/update`, payload)
+          return response
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    deleteProduct: async(id)=> {
+        try {
+          const response = axiosClient.delete(`/product/delete/${id}`)
+          return response
+        } catch (error) {
+            console.log(error);
+        }
+    },
  }))

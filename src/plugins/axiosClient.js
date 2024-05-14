@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "http://18.158.24.26:8080/v1",
+  baseURL: "https://app.rarebek.uz/v1",
 });
 
 axiosClient.interceptors.request.use(

@@ -1,6 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import { useProductStore } from "../../store/ProductStore/ProductStore";
 const style = {
   position: "absolute",
   top: "50%",
@@ -12,7 +13,14 @@ const style = {
   p: 4,
 };
 
-export default function DeleteModal({ open, toggle }) {
+export default function DeleteModal({ open, toggle, id }) {
+    const {deleteProduct} = useProductStore()
+    const removeProduct = async() => {
+        const res = await deleteProduct(id)
+        if (res?.status === 200) {
+            window.location.reload()
+        }
+    }
   return (
     <div>
       <Modal
@@ -22,13 +30,13 @@ export default function DeleteModal({ open, toggle }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <form className="delete__body">
+          <div className="delete__body">
             <h1 className="delete__title">Are you sure?</h1>
             <div className="delete__buttons">
-              <button className="delete__btn-cancel">cancel</button>
-              <button className="delete__btn-delete">delete</button>
+              <button className="delete__btn-cancel" onClick={toggle}>cancel</button>
+              <button className="delete__btn-delete" onClick={removeProduct}>delete</button>
             </div>
-          </form>
+          </div>
         </Box>
       </Modal>
     </div>

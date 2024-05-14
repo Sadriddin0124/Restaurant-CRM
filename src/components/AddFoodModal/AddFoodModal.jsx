@@ -15,33 +15,41 @@ const style = {
   p: 4,
 };
 
-export default function AddFood({ open, toggle }) {
-  const { fileUpload, addProducts } = useProductStore();
-  const [image, setImage] = React.useState("")
-  const ImageUpload = async(e) => {
+export default function AddFood({ open, toggle, editItem }) {
+  const { fileUpload, addProducts, updateProduct } = useProductStore();
+  const [image, setImage] = React.useState("");
+  const [selectedValue, setSelectedValue] = React.useState(editItem?.category_id)
+  const ImageUpload = async (e) => {
     let file = e.target.files[0];
     let formData = new FormData();
     formData.append("file", file);
     const res = await fileUpload(formData);
     console.log(res);
-    setImage(res?.data?.url)
+    setImage(res?.data?.url);
   };
-  const handleProduct = async(e) => {
-    e.preventDefault()
+  const handleProduct = async (e) => {
+    e.preventDefault();
     const payload = {
-        picture: image,
-        title: e.target[1].value,
-        price: +e.target[2].value,
-        discount: +e.target[3].value,
-        category_id: +e.target[4].value,
-        description: e.target[5].value,
+      picture: image ? image : editItem?.picture,
+      title: e.target[1].value ? e.target[1].value : editItem?.title,
+      price: +e.target[2].value ? +e.target[2].value : editItem?.price,
+      discount: +e.target[3].value ? +e.target[3].value : editItem?.discount,
+      category_id: +e.target[4].value ? +e.target[4].value : editItem?.category_id,
+      description: e.target[5].value ? e.target[5].value : editItem?.description,
+    };
+    if (editItem) {
+        console.log(payload);
+        const res = await updateProduct({...payload, id: editItem?.id})
+        if (res?.status === 200) {
+          toggle();
+        }
+    } else {
+      const res = await addProducts(payload);
+      if (res?.status === 201) {
+        toggle();
+      }
     }
-    const res = await addProducts(payload)
-    console.log(res);
-    if (res?.status === 201) {
-        toggle()
-    }
-  }
+  };
   return (
     <div>
       <Modal
@@ -57,11 +65,11 @@ export default function AddFood({ open, toggle }) {
               <img src={Upload} alt="upload" />
             </div>
             <div className="modal__inputs">
-              <input type="text" placeholder="Title" />
-              <input type="text" placeholder="Price" />
-              <input type="text" placeholder="Discount" />
-              <select>
-                <option value="" hidden>
+              <input type="text" placeholder="Title" defaultValue={editItem?.title}/>
+              <input type="text" placeholder="Price" defaultValue={editItem?.price}/>
+              <input type="text" placeholder="Discount" defaultValue={editItem?.discount}/>
+              <select defaultValue={editItem?.category_id} value={selectedValue} onChange={()=>setSelectedValue(e.target.value)}>
+                <option disabled>
                   Select Category
                 </option>
                 <option value="1">Noodles</option>
@@ -69,8 +77,10 @@ export default function AddFood({ open, toggle }) {
                 <option value="3">Drink</option>
                 <option value="4">Dessert</option>
               </select>
-              <textarea rows={4} placeholder="Description"></textarea>
-              <button className="modal__btn" type="submit">Save</button>
+              <textarea rows={4} placeholder="Description" defaultValue={editItem?.description}></textarea>
+              <button className="modal__btn" type="submit">
+                Save
+              </button>
             </div>
           </form>
         </Box>

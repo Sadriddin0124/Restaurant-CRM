@@ -12,6 +12,7 @@ import Food from "../../assets/food1.png";
 import FoodCard from "../../components/FoodCard/FoodCard";
 import { useProductStore } from "../../store/ProductStore/ProductStore";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
+import AddFood from "../../components/AddFoodModal/AddFoodModal";
 const Home = () => {
   const [category, setCategory] = useState([
     { id: 1, img: Category1, text: "Noodles" },
@@ -77,17 +78,23 @@ const Home = () => {
   }, [])
   const receiveProducts = async() => {
     const res = await getProducts()
-    console.log(res);
     setFoods(res?.data?.products)
   }
   const [openRightBar, setOpenRightBar] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false)
+  const [openModal, setOpenModal] = useState(false)
+  const [editItem, setEditItem] = useState("")
+  const [deleteID, setDeleteID] = useState("")
   const toggle = () => {
     setDeleteModal(false)
+    setOpenModal(false)
+    setEditItem("")
+    setDeleteID("")
   }
   return (
     <div className="home">
-      <DeleteModal open={deleteModal} toggle={toggle}/>
+      <DeleteModal open={deleteModal} toggle={toggle} id={deleteID}/>
+      <AddFood open={openModal} toggle={toggle} editItem={editItem}/>
       <div className="home__sidebar">
         <Sidebar />
       </div>
@@ -110,7 +117,7 @@ const Home = () => {
         <div className="home__foods">
             {
                 foods?.map((item,index)=> {
-                    return <FoodCard key={index} item={item} setDeleteModal={setDeleteModal}/>
+                    return <FoodCard key={index} item={item} setDeleteModal={setDeleteModal} setOpenModal={setOpenModal} setEditItem={setEditItem} setDeleteID={setDeleteID}/>
                 })
             }
         </div>

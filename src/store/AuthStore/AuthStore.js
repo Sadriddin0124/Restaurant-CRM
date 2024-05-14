@@ -1,7 +1,6 @@
 import {create} from "zustand"
-import axiosClient from "../../plugins/axiosClient"
 import axios from "axios"
-const baseURL = "http://18.158.24.26:8080/v1"
+const baseURL = "https://app.rarebek.uz/v1"
 export const useAuthStore = create((set) => ({ 
     RegisterOwner: async(payload)=> {
         try {
