@@ -73,20 +73,20 @@
     box-shadow: 0 0 10px silver;
 }
 
-@media (max-width: 1151px) {
+@media (max-width: 1231px) {
     .navbar {
         padding: 24px 0;
     }
     .navbar__left {
         display: none;
     }
+    .navbar__search {
+        width: 100%;
+    }
 }
 
 @media (max-width: 900px) {
     .navbar {
         padding: 24px;
-    }
-    .navbar__search {
-        width: 100%;
     }
 } 

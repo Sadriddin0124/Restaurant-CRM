@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import "./Sidebar.scss"
 import Logo from "../../assets/logo.png"
 import { LiaHomeSolid } from "react-icons/lia";
-import { TbNotification } from "react-icons/tb";
 import { IoSettingsOutline } from "react-icons/io5";
 import { Link } from 'react-router-dom';
+import { FaUsers } from "react-icons/fa6";
 
 const Sidebar = () => {
   const [sidebarLink, setSidebarLink] = useState([
     {icon: <LiaHomeSolid size={24}/>, path: "/home"},
-    {icon: <TbNotification size={26}/>, path: "/notifications"},
+    {icon: <FaUsers size={26}/>, path: "/workers"},
     {icon: <IoSettingsOutline size={24}/>, path: "/settings"},
   ])
   const url = "/" + window.location.href.split("/")[3]

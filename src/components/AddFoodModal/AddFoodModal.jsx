@@ -41,12 +41,12 @@ export default function AddFood({ open, toggle, editItem }) {
         console.log(payload);
         const res = await updateProduct({...payload, id: editItem?.id})
         if (res?.status === 200) {
-          toggle();
+          window.location.reload()
         }
-    } else {
-      const res = await addProducts(payload);
-      if (res?.status === 201) {
-        toggle();
+      } else {
+        const res = await addProducts(payload);
+        if (res?.status === 201) {
+        window.location.reload()
       }
     }
   };

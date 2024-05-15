@@ -1,19 +1,19 @@
 import React from "react";
-import "./Notifications.scss";
+import "./Workers.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
 import BasicTable from "../../components/Table/Table";
-const Notifications = () => {
+const Workers = () => {
   return (
-    <div className="notifications">
-      <div className="notifications__sidebar">
+    <div className="workers">
+      <div className="workers__sidebar">
         <Sidebar />
       </div>
-      <div className="notifications__right">
-        <div className="notifications__navbar">
+      <div className="workers__right">
+        <div className="workers__navbar">
           <Navbar />
         </div>
-        <div className="notifications__table">
+        <div className="workers__table">
           <BasicTable />
         </div>
       </div>
@@ -21,4 +21,4 @@ const Notifications = () => {
   );
 };
 
-export default Notifications;
+export default Workers;

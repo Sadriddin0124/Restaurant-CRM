@@ -23,9 +23,9 @@ export const useAuthStore = create((set) => ({
         try {
           const response = axios.get(`${baseURL}/login?email=${payload?.email}&password=${payload?.password}`)
           return response
-        } catch (error) {
-            console.log(error);
-            return error
+        } catch (err) {
+            console.error(err);
+            return err
         }
     },
  }))

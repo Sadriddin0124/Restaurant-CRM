@@ -5,6 +5,8 @@ import { IoEyeOff } from "react-icons/io5";
 import { IoEye } from "react-icons/io5";
 import Logo from "../../../assets/logo.png";
 import { useAuthStore } from "../../../store/AuthStore/AuthStore";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Login = ({ switchAuth, setSwitchAuth }) => {
   const { LoginOwner } = useAuthStore();
   const [type, setType] = useState(true);
@@ -19,12 +21,16 @@ const Login = ({ switchAuth, setSwitchAuth }) => {
     const res = await LoginOwner(payload)
     if (res?.status === 200) {
       navigate("/home");
+      toast.success("Logged in")
+    }else {
+      toast.error("Something wrong")
     }
     sessionStorage.setItem("token", res?.data?.AccessToken);
     console.log(res);
   };
   return (
     <div className={switchAuth ? "none" : "login"}>
+      <ToastContainer/>
       <div className="auth__right-top">
         <div className="auth__logo">
           <img src={Logo} alt="" />
