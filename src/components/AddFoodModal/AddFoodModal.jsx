@@ -62,7 +62,7 @@ export default function AddFood({ open, toggle, editItem }) {
           <form className="modal__body" onSubmit={handleProduct}>
             <div className="modal__image">
               <input type="file" onChange={ImageUpload} />
-              <img src={Upload} alt="upload" />
+              <img src={image ? image : Upload} alt="upload" />
             </div>
             <div className="modal__inputs">
               <input type="text" placeholder="Title" defaultValue={editItem?.title}/>
