@@ -7,7 +7,7 @@ import Logo from "../../../assets/logo.png";
 import { useAuthStore } from "../../../store/AuthStore/AuthStore";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const Login = ({ switchAuth, setSwitchAuth }) => {
+const Login = ({ switchAuth, setSwitchAuth, notify }) => {
   const { LoginOwner } = useAuthStore();
   const [type, setType] = useState(true);
   const navigate = useNavigate();
@@ -19,18 +19,16 @@ const Login = ({ switchAuth, setSwitchAuth }) => {
       password: e.target[1].value,
     };
     const res = await LoginOwner(payload)
+    console.log(res);
     if (res?.status === 200) {
       navigate("/home");
-      toast.success("Logged in")
-    }else {
-      toast.error("Something wrong")
+      notify("Logged in")
     }
-    sessionStorage.setItem("token", res?.data?.AccessToken);
-    console.log(res);
+    sessionStorage.setItem("token", res?.data?.access_token);
+    localStorage.setItem("owner_id", res?.data?.owner_id);
   };
   return (
     <div className={switchAuth ? "none" : "login"}>
-      <ToastContainer/>
       <div className="auth__right-top">
         <div className="auth__logo">
           <img src={Logo} alt="" />
@@ -76,14 +74,9 @@ const Login = ({ switchAuth, setSwitchAuth }) => {
             placeholder="Enter your Password"
           />
         </div>
-        {/* <div className="login__bottom">
-            <div className="login__remember">
-                <input type="checkbox" id="remember"/>
-                <label htmlFor="remember">Remember me</label>
-            </div>
-            <Link className="login__forgot">Forgot Password ?</Link>
-        </div> */}
-        <button className="auth__btn">Login</button>
+      <button className="auth__btn">
+        Login
+      </button>
       </form>
     </div>
   );

@@ -12,7 +12,8 @@ import Food from "../../assets/food1.png";
 import FoodCard from "../../components/FoodCard/FoodCard";
 import { useProductStore } from "../../store/ProductStore/ProductStore";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
-import AddFood from "../../components/AddFoodModal/AddFoodModal";
+import AddFood from "../../components/Modals/AddFoodModal/AddFoodModal";
+import { useCategoryStore } from "../../store/CategoryStore/CategoryStore";
 const Home = () => {
   const [category, setCategory] = useState([
     { id: 1, img: Category1, text: "Noodles" },
@@ -73,12 +74,21 @@ const Home = () => {
   ]);
   const { getProducts} = useProductStore()
   const [foods, setFoods] = useState([])
+  const [categories, setCategories] = useState([])
+  const {getCategory} = useCategoryStore()
   useEffect(()=> {
     receiveProducts()
+    receiveCategory()
   }, [])
   const receiveProducts = async() => {
     const res = await getProducts()
     setFoods(res?.data?.products)
+    console.log(res);
+  }
+  const receiveCategory = async() => {
+    const response = await getCategory()
+    console.log(response);
+    setCategories(response?.data?.Categories)
   }
   const [openRightBar, setOpenRightBar] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false)
@@ -101,14 +111,12 @@ const Home = () => {
       <div className="home__center">
         <Navbar />
         <div className="home__category">
-          {category?.map((item, index) => {
+          {categories?.map((item, index) => {
             return (
               <Category
                 setActiveCategory={setActiveCategory}
                 activeCategory={activeCategory}
-                id={item?.id}
-                img={item?.img}
-                text={item?.text}
+                item={item}
                 key={index}
               />
             );

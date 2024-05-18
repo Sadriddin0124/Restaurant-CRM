@@ -13,7 +13,8 @@ export const useProductStore = create((set) => ({
     },
     getProducts: async()=> {
         try {
-          const response = axiosClient.get(`/products/get/1/12`)
+            const owner_id = localStorage.getItem("owner_id")
+          const response = axiosClient.get(`/products/get/1/12/${owner_id}`)
           set({products: response?.data})
           return response
         } catch (error) {

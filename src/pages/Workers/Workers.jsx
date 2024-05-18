@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Workers.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
 import BasicTable from "../../components/Table/Table";
+import AddWorker from "../../components/Modals/AddWorker/AddWorker"
 const Workers = () => {
+  
   return (
     <div className="workers">
       <div className="workers__sidebar">

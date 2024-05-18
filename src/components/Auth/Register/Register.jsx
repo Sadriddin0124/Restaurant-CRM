@@ -40,7 +40,9 @@ const Register = ({ switchAuth, setSwitchAuth }) => {
     };
     const res = await RegisterOwner(payload)
     console.log(res)
-    navigate("/verify")
+    if (res?.status === 200) {
+      navigate("/verify")
+    }
   };
   return (
     <div className={switchAuth ? "login" : "none"}>

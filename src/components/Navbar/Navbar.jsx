@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Navbar.scss";
 import { IoIosSearch } from "react-icons/io";
-import AddFood from "../AddFoodModal/AddFoodModal";
+import AddFood from "../Modals/AddFoodModal/AddFoodModal";
 
 const Navbar = () => {
   const [addFood, setAddFood] = useState(false)

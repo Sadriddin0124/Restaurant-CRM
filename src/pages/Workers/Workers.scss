@@ -44,6 +44,23 @@
   background: var(--slate);
 }
 
+.table__btn {
+    width: 100px;
+    height: 40px;
+    font-size: 18px;
+    background: var(--black);
+    color: var(--white);
+    @extend %flex_center;
+    justify-content: space-evenly;
+    border-radius: 50vw;
+    cursor: pointer;
+    border: none;
+}
+
+.table__container {
+  border-radius: 20px 20px 0 0;
+}
+
 @media (max-width: 1151px) {
   .workers__navbar {
     width: 100%;
