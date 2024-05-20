@@ -15,21 +15,27 @@ const style = {
 };
 
 export default function AddFood({ open, toggle, editItem }) {
-    const {postWorker} = useWorkerStore()
+  const { postWorker, updateWorker } = useWorkerStore();
   const handleWorker = async (e) => {
     e.preventDefault();
     const payload = {
-        full_name: e.target[0].value ? e.target[0].value : editItem?.full_name,
+      full_name: e.target[0].value ? e.target[0].value : editItem?.full_name,
       login_key: e.target[1].value ? e.target[1].value : editItem?.login_key,
       password: e.target[2].value ? e.target[2].value : editItem?.password,
       owner_id: localStorage.getItem("owner_id"),
     };
     console.log(payload);
-    const res = await postWorker(payload)
-    if (res?.status === 201) {
-      window.location.reload()
+    if (editItem) {
+      const res = await updateWorker({...payload, id: editItem?.id});
+      if (res?.status === 200) {
+        window.location.reload();
+      }
+    } else {
+      const res = await postWorker(payload);
+      if (res?.status === 201) {
+        window.location.reload();
+      }
     }
-    console.log(res);
   };
   return (
     <div>
@@ -42,9 +48,21 @@ export default function AddFood({ open, toggle, editItem }) {
         <Box sx={style}>
           <form className="modal__body" onSubmit={handleWorker}>
             <div className="modal__inputs">
-              <input type="text" placeholder="FullName" defaultValue={editItem?.full_name}/>
-              <input type="text" placeholder="Login" defaultValue={editItem?.login_key}/>
-              <input type="text" placeholder="Password" defaultValue={editItem?.password}/>
+              <input
+                type="text"
+                placeholder="FullName"
+                defaultValue={editItem?.full_name}
+              />
+              <input
+                type="text"
+                placeholder="Login"
+                defaultValue={editItem?.login_key}
+              />
+              <input
+                type="text"
+                placeholder="Password"
+                defaultValue={editItem?.password}
+              />
               <button className="modal__btn" type="submit">
                 Save
               </button>

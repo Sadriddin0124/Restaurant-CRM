@@ -59,18 +59,38 @@
     padding: 12px;
 }
 
+.navbar__buttons {
+    @extend %flex_center;
+}
+
+.none {
+    display: none;
+}
+
 .navbar__btn {
-    padding: 8px 24px;
+    padding: 8px 7px 8px 14px;
     height: 46px;
-    background: var(--orange);
-    border-radius: 20px;
+    background: var(--black);
+    border-radius: 20px 0 0 20px;
     white-space: nowrap;
     color: var(--white);
-    font-size: 16px;
+    font-size: 14px;
     border: none;
     margin-left: 10px;
     cursor: pointer;
-    box-shadow: 0 0 10px silver;
+}
+
+.navbar__btn2 {
+    padding: 8px 14px 8px 7px;
+    height: 46px;
+    background: var(--orange);
+    border-radius: 0 20px 20px 0;
+    white-space: nowrap;
+    color: var(--white);
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    // box-shadow: 0 0 10px silver;
 }
 
 @media (max-width: 1231px) {

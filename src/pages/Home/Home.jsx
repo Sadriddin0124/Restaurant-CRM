@@ -14,6 +14,8 @@ import { useProductStore } from "../../store/ProductStore/ProductStore";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
 import AddFood from "../../components/Modals/AddFoodModal/AddFoodModal";
 import { useCategoryStore } from "../../store/CategoryStore/CategoryStore";
+import AddCategory from "../../components/Modals/AddCategory/AddCategory";
+import DeleteCategory from "../../components/Modals/DeleteCategory/DeleteCategory";
 const Home = () => {
   const [category, setCategory] = useState([
     { id: 1, img: Category1, text: "Noodles" },
@@ -92,24 +94,31 @@ const Home = () => {
   }
   const [openRightBar, setOpenRightBar] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false)
+  const [deleteCategory, setDeleteCategory] = useState(false)
   const [openModal, setOpenModal] = useState(false)
   const [editItem, setEditItem] = useState("")
   const [deleteID, setDeleteID] = useState("")
+  const [addCategory, setAddCategory] = useState(false)
+  const [image, setImage] = useState("")
   const toggle = () => {
     setDeleteModal(false)
+    setAddCategory(false)
     setOpenModal(false)
+    setDeleteCategory(false)
     setEditItem("")
     setDeleteID("")
   }
   return (
     <div className="home">
       <DeleteModal open={deleteModal} toggle={toggle} id={deleteID}/>
+      <DeleteCategory open={deleteCategory} toggle={toggle} id={deleteID}/>
       <AddFood open={openModal} toggle={toggle} editItem={editItem}/>
+      <AddCategory open={addCategory} toggle={toggle} editItem={editItem} setImage={setImage} image={image}/>
       <div className="home__sidebar">
         <Sidebar />
       </div>
       <div className="home__center">
-        <Navbar />
+        <Navbar setAddCategory={setAddCategory} setOpenModal={setOpenModal}/>
         <div className="home__category">
           {categories?.map((item, index) => {
             return (
@@ -117,6 +126,11 @@ const Home = () => {
                 setActiveCategory={setActiveCategory}
                 activeCategory={activeCategory}
                 item={item}
+                setAddCategory={setAddCategory}
+                setEditItem={setEditItem}
+                setImage={setImage}
+                setDeleteID={setDeleteID}
+                setDeleteCategory={setDeleteCategory}
                 key={index}
               />
             );

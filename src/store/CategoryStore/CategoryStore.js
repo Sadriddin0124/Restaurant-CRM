@@ -15,4 +15,28 @@ export const useCategoryStore = create((set) => ({
       console.log(error);
     }
   },
+  addCategory: async (payload) => {
+    try {
+      const response = axiosClient.post(`/category/create`, payload);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  updateCategory: async (payload) => {
+    try {
+      const response = axiosClient.put(`/category/update`, payload);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  deleteCategory: async (id) => {
+    try {
+      const response = axiosClient.delete(`/category/delete/${id}`);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  },
 }));

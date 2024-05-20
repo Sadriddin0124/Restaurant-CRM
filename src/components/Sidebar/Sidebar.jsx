@@ -10,7 +10,7 @@ const Sidebar = () => {
   const [sidebarLink, setSidebarLink] = useState([
     {icon: <LiaHomeSolid size={24}/>, path: "/home"},
     {icon: <FaUsers size={26}/>, path: "/workers"},
-    {icon: <IoSettingsOutline size={24}/>, path: "/settings"},
+    // {icon: <IoSettingsOutline size={24}/>, path: "/settings"},
   ])
   const url = "/" + window.location.href.split("/")[3]
   return (

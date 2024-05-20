@@ -5,7 +5,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import BasicTable from "../../components/Table/Table";
 import AddWorker from "../../components/Modals/AddWorker/AddWorker"
 const Workers = () => {
-  
+  const [addWorker, setAddWorker] = useState(false)
   return (
     <div className="workers">
       <div className="workers__sidebar">
@@ -13,7 +13,7 @@ const Workers = () => {
       </div>
       <div className="workers__right">
         <div className="workers__navbar">
-          <Navbar />
+          <Navbar setAddWorker={setAddWorker}/>
         </div>
         <div className="workers__table">
           <BasicTable />

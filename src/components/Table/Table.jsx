@@ -8,41 +8,39 @@ import TableRow from "@mui/material/TableRow";
 import { useWorkerStore } from "../../store/WorkersStore/WorkersStore";
 import { MdOutlineDelete } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
-import AddWorker from "../Modals/AddWorker/AddWorker"
+import AddWorker from "../Modals/AddWorker/AddWorker";
+import DeleteWorker from "../Modals/DeleteWorker/DeleteWorker";
 
-function createData(id, fullName, login, password) {
-  return { id, fullName, login, password };
-}
-
-// const rows = [
-//   createData(1, "Jacob Ryan", "12 Jan 2022", "Hamburger", "5%", "8%"),
-//   createData(2, "Jacob Ryan", "12 Jan 2022", "Hamburger", "5%", "8%"),
-//   createData(3, "Jacob Ryan", "12 Jan 2022", "Hamburger", "5%", "8%"),
-//   createData(4, "Jacob Ryan", "12 Jan 2022", "Hamburger", "5%", "8%"),
-//   createData(5, "Jacob Ryan", "12 Jan 2022", "Hamburger", "5%", "8%"),
-//   createData(6, "Jacob Ryan", "12 Jan 2022", "Hamburger", "5%", "8%"),
-// ];
-const rows = []
 export default function BasicTable() {
   const { getWorkers } = useWorkerStore();
- const [workers, setWorkers] = React.useState([])
+  const [workers, setWorkers] = React.useState([]);
   React.useEffect(() => {
     fetchData();
   }, []);
   const fetchData = async () => {
     const res = await getWorkers();
     setWorkers(res?.data?.all_workers);
-    // res?.data?.all_workers?.map((item,index)=> {
-    //   rows.push(createData(item?.id, item?.full_name, item?.login_key, item?.password))
-    // })
   };
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(false);
+  const [deleteWorker, setDeleteWorker] = React.useState(false);
+  const [editItem, setEditItem] = React.useState("")
+  const [deleteID, setDeleteID] = React.useState("")
   const toggle = () => {
-    setOpen(false)
+    setOpen(false);
+    setDeleteWorker(false)
+  };
+  const editWorker = (item) => {
+    setEditItem(item)
+    setOpen(true)
+  };
+  const removeWorker = (id) => {
+    setDeleteID(id)
+    setDeleteWorker(true)
   }
   return (
     <TableContainer className="table__container">
-      <AddWorker open={open} toggle={toggle}/>
+      <AddWorker open={open} toggle={toggle} editItem={editItem}/>
+      <DeleteWorker open={deleteWorker} toggle={toggle} id={deleteID}/>
       <Table
         sx={{ minWidth: 540, background: "transparent" }}
         aria-label="simple table"
@@ -64,12 +62,14 @@ export default function BasicTable() {
             <TableCell align="left">Login</TableCell>
             <TableCell align="left">Password</TableCell>
             <TableCell align="left">
-              <button className="table__btn" onClick={()=>setOpen(true)}>Add</button>
+              <button className="table__btn" onClick={() => setOpen(true)}>
+                Add
+              </button>
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {workers?.map((item,index) => (
+          {workers?.map((item, index) => (
             <TableRow
               key={index}
               sx={{
@@ -85,8 +85,8 @@ export default function BasicTable() {
               <TableCell align="right">{item.password}</TableCell>
               <TableCell align="right">
                 <button className="table__btn">
-                  <MdOutlineDelete size={24} />
-                  <CiEdit size={24} />
+                  <MdOutlineDelete size={24} onClick={()=>removeWorker(item?.id)}/>
+                  <CiEdit size={24} onClick={() => editWorker(item)} />
                 </button>
               </TableCell>
             </TableRow>
